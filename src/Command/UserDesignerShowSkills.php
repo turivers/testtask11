@@ -7,6 +7,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use App\Entity\User;
+use App\Utils\FormatOutputForSkillList;
 
 class UserDesignerShowSkills extends Command
 {
@@ -23,10 +24,11 @@ class UserDesignerShowSkills extends Command
         $userType = explode(':', $input->getArgument('command'));
 
         $user = new User($userType[1]);
-        $skillsList = $user->getUserSkillsListTrue($user);
 
-        foreach ($skillsList as $v) {
-            $output->writeln('- ' . $v);
+        $formatOutput = new FormatOutputForSkillList($user);
+
+        foreach ($formatOutput->userSkillList as $v) {
+            $output->writeln($v);
         }
     }
 }

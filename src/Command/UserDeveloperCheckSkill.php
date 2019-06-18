@@ -7,6 +7,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use App\Entity\User;
+use App\Utils\FormatOutputForCheckSkill;
 
 class UserDeveloperCheckSkill extends Command
 {
@@ -24,11 +25,13 @@ class UserDeveloperCheckSkill extends Command
         $userType = explode(':', $input->getArgument('command'));
 
         $user = new User($userType[1]);
-        $skillsList = $user->getUserSkillsListTrue($user);
-        
-        $getResultCheckSkill = $user->userCheckSkill($skillsList, $input->getArgument('can'));
 
-        $output->writeln($getResultCheckSkill);
+        $can = $input->getArgument('can');
+        $userSkillStatus = $user->$can;
+
+        $formatOutput = new FormatOutputForCheckSkill($userSkillStatus);
+
+        $output->writeln($formatOutput->userCheckSkill);
     }
 }
 

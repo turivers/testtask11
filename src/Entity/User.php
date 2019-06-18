@@ -35,19 +35,9 @@ class User
         }
     }
 
-    public function getUserSkillsListTrue( $userSkillsList )
+    public function __get( $n )
     {
-        foreach ($userSkillsList as $k => $v) {
-            if ($v) {
-                $userSkillsListTrue[$k]= $v;
-            }
-        }
-        return $userSkillsListTrue;
-    }
-
-    public function userCheckSkill( $userSkillsList, $checkSkill )
-    {
-        return array_key_exists($checkSkill, $userSkillsList) ? 'true' : 'false';
+        return false;
     }
 }
 
