@@ -18,7 +18,7 @@ Usage
 
 Examples:
 
-Input
+Input Commands
 ```bash
 $ php bin/console user:developer
 ```
