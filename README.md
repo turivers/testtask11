@@ -33,7 +33,6 @@ Output
 Input Commands
 ```bash
 $ php bin/console can:developer writeCode
-true
 ```
 
 Output
@@ -41,16 +40,18 @@ Output
 true
 ```
 
-show users skills
-user
-    user:designer
-    user:developer
-    user:manager
-    user:tester
+Show users skills
+```bash
+$ php bin/console user:developer
+$ php bin/console user:designer
+$ php bin/console user:manager
+$ php bin/console user:tester
+```
 
 Check users skills
-can
-    can:designer writeCode | testCode | commWithPM | createTasks
-    can:developer
-    can:manager
-    can:tester
+```bash
+$ php bin/console can:designer writeCode | testCode | commWithPM | createTasks
+$ php bin/console can:developer
+$ php bin/console can:manager
+$ php bin/console can:tester
+```
