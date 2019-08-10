@@ -4,34 +4,42 @@ namespace App\Entity;
 
 class User
 {
-    public $writeCode = 'code writing';
-    public $testCode = 'code testing';
-    public $commWithPM = 'communication with manager';
-    public $draw = 'drawing';
-    public $createTasks = 'tasks creation';
+    private static $userAllSkills = [
+        'writeCode' => 'code writing',
+        'testCode' => 'code testing',
+        'commWithPM' => 'communication with manager',
+        'draw' => 'drawing',
+        'createTasks' => 'tasks creation',        
+    ];
 
-    function __construct( $userType )
+    public static $userSkills = [];
+
+    function __construct ( string $userType )
     {
+        self::$userSkills = self::$userAllSkills;
+
         switch ($userType) {
             case 'developer':
-                $this->draw = false;
-                $this->createTasks = false;
+                unset(self::$userSkills['draw']);
+                unset(self::$userSkills['createTasks']);
                 break;
             case 'designer':
-                $this->writeCode = false;
-                $this->testCode = false;
-                $this->createTasks = false;
+                unset(self::$userSkills['writeCode']);
+                unset(self::$userSkills['testCode']);
+                unset(self::$userSkills['createTasks']);
                 break;
             case 'tester':
-                $this->writeCode = false;
-                $this->draw = false;
+                unset(self::$userSkills['writeCode']);
+                unset(self::$userSkills['draw']);
                 break;
             case 'manager':
-                $this->writeCode = false;
-                $this->testCode = false;
-                $this->commWithPM = false;
-                $this->draw = false;
+                unset(self::$userSkills['writeCode']);
+                unset(self::$userSkills['testCode']);
+                unset(self::$userSkills['commWithPM']);
+                unset(self::$userSkills['draw']);
                 break;
+            default:
+                unset(self::$userSkills);
         }
     }
 

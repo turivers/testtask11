@@ -7,7 +7,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use App\Entity\User;
-use App\Utils\FormatOutputForCheckSkill;
+use App\Utils\FormatOutput;
 
 class UserDeveloperCheckSkill extends Command
 {
@@ -16,7 +16,7 @@ class UserDeveloperCheckSkill extends Command
         $this
             ->setName('can:developer')
             ->setDescription('developer check skill')
-            ->addArgument('can', InputArgument::REQUIRED, 'What user can do')
+            ->addArgument('can', InputArgument::REQUIRED, 'What developer can do')
         ;
     }
 
@@ -25,13 +25,11 @@ class UserDeveloperCheckSkill extends Command
         $userType = explode(':', $input->getArgument('command'));
 
         $user = new User($userType[1]);
+        $fo = new FormatOutput;
 
         $can = $input->getArgument('can');
-        $userSkillStatus = $user->$can;
-
-        $formatOutput = new FormatOutputForCheckSkill($userSkillStatus);
-
-        $output->writeln($formatOutput->userCheckSkill);
+        $bo = array_key_exists($can, $user::$userSkills);
+        
+        $output->writeln($fo->boolToString($bo));
     }
 }
-

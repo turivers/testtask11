@@ -50,7 +50,7 @@ $ php bin/console user:tester
 
 Check users skills
 ```bash
-$ php bin/console can:designer writeCode | testCode | commWithPM | createTasks
+$ php bin/console can:designer writeCode | testCode | commWithPM | createTasks | draw
 $ php bin/console can:developer
 $ php bin/console can:manager
 $ php bin/console can:tester
